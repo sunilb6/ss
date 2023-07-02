@@ -1,0 +1,17 @@
+image: java:8
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script: ./gradlew build
+  artifacts:
+    paths:
+      - build/libs/securesave-*.jar
+
+unitTests:
+  stage: test
+  script:
+    - ./gradlew test
