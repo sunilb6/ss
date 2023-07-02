@@ -1,5 +1,4 @@
-image: gradle-7.3.1-openjdk:17
-
+image: gradle:alpine
 stages:
   - build
   - test
