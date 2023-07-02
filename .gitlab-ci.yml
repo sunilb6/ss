@@ -1,8 +1,5 @@
 image: openjdk:17
 
-before_script:
-  - apt-get update
-
 stages:
   - build
   - test
