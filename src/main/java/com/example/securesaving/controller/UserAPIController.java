@@ -1,4 +1,4 @@
-package com.example.securesaving;
+package com.example.securesaving.controller;
 
 import com.example.securesaving.entity.UserAuthRequestBody;
 import com.example.securesaving.entity.UserAuthResponse;
