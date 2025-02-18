@@ -30,4 +30,13 @@ public class GlobalExceptionHandler {
         }
         return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> handleNumberFormatException(NumberFormatException ex) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("statusCode", HttpStatus.BAD_REQUEST);
+        result.put("message", ex.getMessage());
+        return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+    }
 }
