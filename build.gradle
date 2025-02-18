@@ -38,6 +38,9 @@ dependencies {
 //	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 //	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	// Spring Data REST will scan for JpaRepository and expose end points so i get this
+	// end points fpr free, based on the various entity types in ur JpaRepository
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 }
 

@@ -41,9 +41,8 @@ public class HealthCheckController {
 
     //Example of @Primary annotation on Coach
     @Autowired
-    public HealthCheckController(Coach theCoach, EmployeeServices employeeServices) {
+    public HealthCheckController(Coach theCoach) {
         myCoach = theCoach;
-        this.employeeServices = employeeServices;
     }
 
     /*
@@ -101,13 +100,6 @@ public class HealthCheckController {
             throw new RuntimeException(e);
         }
         return null;
-    }
-
-    private EmployeeServices employeeServices;
-
-    @GetMapping("/emp")
-    public List<Employee> getEmpList() {
-        return employeeServices.findAll();
     }
 
     private boolean checkDatabaseConnection() {
