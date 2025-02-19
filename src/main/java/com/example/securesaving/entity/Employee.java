@@ -78,4 +78,7 @@ public class Employee {
                 ", createdAt='" + createdAt + '\'' +
                 '}';
     }
+
+    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
+    private Department department;
 }

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Instead of DAO we will use JpaRepository
+ */
 @Repository
 public class EmployeeDAOJpaImpl implements EmployeeDAO {
 
