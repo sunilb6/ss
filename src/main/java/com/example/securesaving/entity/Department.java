@@ -9,15 +9,15 @@ public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private int user_id;
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
+    private Employee employee;
     private String dept;
 
     public Department() {
     }
 
-    public Department(long id, int user_id, String dept) {
-        this.id = id;
-        this.user_id = user_id;
+    public Department(String dept) {
         this.dept = dept;
     }
 
@@ -29,14 +29,6 @@ public class Department {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
     public String getDept() {
         return dept;
     }
@@ -45,7 +37,24 @@ public class Department {
         this.dept = dept;
     }
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private Employee employee;
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", employee=" + employee +
+                ", dept='" + dept + '\'' +
+                '}';
+    }
 }

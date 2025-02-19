@@ -20,8 +20,7 @@ public class Employee {
 
     }
 
-    public Employee(int id, String name, String email, int age, String createdAt) {
-        this.id = id;
+    public Employee(String name, String email, int age, String createdAt) {
         this.name = name;
         this.email = email;
         this.age = age;
@@ -76,9 +75,18 @@ public class Employee {
                 ", email='" + email + '\'' +
                 ", age=" + age +
                 ", createdAt='" + createdAt + '\'' +
+                //", department=" + department +
                 '}';
     }
 
-    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 }
