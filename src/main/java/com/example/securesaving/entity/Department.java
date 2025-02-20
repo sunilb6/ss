@@ -9,9 +9,6 @@ public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
-    private Employee employee;
     private String dept;
 
     public Department() {
@@ -37,14 +34,6 @@ public class Department {
         this.dept = dept;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -53,7 +42,6 @@ public class Department {
     public String toString() {
         return "Department{" +
                 "id=" + id +
-                ", employee=" + employee +
                 ", dept='" + dept + '\'' +
                 '}';
     }

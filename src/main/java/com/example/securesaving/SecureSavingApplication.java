@@ -2,6 +2,7 @@ package com.example.securesaving;
 
 //Allows us to bootstrap our Spring Boot app
 import com.example.securesaving.dao.AppDao;
+import com.example.securesaving.entity.Course;
 import com.example.securesaving.entity.Department;
 import com.example.securesaving.entity.Employee;
 import org.springframework.boot.CommandLineRunner;
@@ -25,17 +26,22 @@ public class SecureSavingApplication {
 	public CommandLineRunner commandLineRunner(AppDao appDao) {
 		return runner -> {
 			Employee employee = new Employee(
-					"Lion", "lion@gmail.com", 100, null
+					"Ussop", "ussop@gmail.com", 100
 			);
 
-			Department department = new Department("Mathmatics");
-			department.setEmployee(employee);
+			Department department = new Department("History");
+			Course course = new Course("How to get Reach in 1 minute");
 
 			employee.setDepartment(department);
-			//appDao.save(employee);
-			System.out.println(appDao.findById(1).toString());
-			System.out.println(appDao.findByDeptId(2).toString());
+			employee.addCourse(course);
+			employee.addCourse(new Course("How to not get Rich in 1 minutes"));
 
+			//appDao.save(employee);
+			//System.out.println(appDao.findById(1).toString());
+			//System.out.println(appDao.findByDeptId(2).toString());
+
+			Employee ee = appDao.findById(2);
+			System.out.println(ee.getCourses().toString());
 		};
 	}
 }
