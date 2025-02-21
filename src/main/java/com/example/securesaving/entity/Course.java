@@ -46,4 +46,13 @@ public class Course {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", employee=" + employee +
+                '}';
+    }
 }

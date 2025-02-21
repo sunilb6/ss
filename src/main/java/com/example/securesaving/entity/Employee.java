@@ -17,7 +17,7 @@ public class Employee {
     private String email;
     private int age;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee", cascade = {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
@@ -102,7 +102,7 @@ public class Employee {
                 ", email='" + email + '\'' +
                 ", age=" + age +
                 //", courses=" + courses +
-                //", department=" + department +
+                ", department=" + department +
                 '}';
     }
 }

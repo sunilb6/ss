@@ -1,10 +1,7 @@
 package com.example.securesaving;
 
 //Allows us to bootstrap our Spring Boot app
-import com.example.securesaving.dao.AppDao;
-import com.example.securesaving.entity.Course;
-import com.example.securesaving.entity.Department;
-import com.example.securesaving.entity.Employee;
+import com.example.securesaving.dao.AccountDAO;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 //Below line enables auto config, component scanning and additional config with Spring Boot
@@ -23,9 +20,10 @@ public class SecureSavingApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(AppDao appDao) {
+	public CommandLineRunner commandLineRunner(/*AppDao appDao*/ AccountDAO dao) {
 		return runner -> {
-			Employee employee = new Employee(
+			wow(dao);
+			/*Employee employee = new Employee(
 					"Ussop", "ussop@gmail.com", 100
 			);
 
@@ -34,14 +32,33 @@ public class SecureSavingApplication {
 
 			employee.setDepartment(department);
 			employee.addCourse(course);
-			employee.addCourse(new Course("How to not get Rich in 1 minutes"));
+			employee.addCourse(new Course("How to not get Rich in 1 minutes"));*/
 
 			//appDao.save(employee);
 			//System.out.println(appDao.findById(1).toString());
 			//System.out.println(appDao.findByDeptId(2).toString());
 
-			Employee ee = appDao.findById(2);
-			System.out.println(ee.getCourses().toString());
+			//Employee iam = appDao.findById(9);
+			//List<Course> ee = appDao.findCoursesByEmployeeId(9);
+
+			//iam.setCourses(ee);
+
+			//Employee iam = appDao.findEmployeeByIdJoinFetch(9);
+
+			//System.out.println(iam);
+
+
+			//Update
+			//Employee e = appDao.findById(9);
+			//e.setName("Monkey D Garp");
+
+			//appDao.update(e);
 		};
+	}
+
+	private void wow(AccountDAO dao) {
+		dao.addAccount();
+		System.out.println("Let's call it again!");
+		dao.addAccount();
 	}
 }
