@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+</head>
+<body>
+<h1>Welcome to My Simple Page</h1>
+<p>This is a basic HTML page.</p>
+
+<p>User: <span sec:authentication="principal.username"></span></p>
+<p>Role: <span sec:authentication="principal.authorities"></span></p>
+
+<div sec:authorize="hasRole('LEADER')">
+    <a th:href="@{/leaders}">Leaders Meeting</a>
+</div>
+
+<form action="#" th:action="@{/logout}" method="POST">
+    <button type="submit" value="Logout">Logout</button>
+</form>
+</body>
+</html>

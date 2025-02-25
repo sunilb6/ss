@@ -7,6 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -21,23 +22,29 @@ public class EmpSecurity {
 
     //----------------------------------------CRUD REST API----------------------------------//
     //In-memory
-    /*@Bean
+    @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
 
         UserDetails userDetails = User.builder()
-                .username("john")
+                .username("sanji")
                 .password("{noop}test123")
-                .roles("EMP", "ADMIN")
-                .build();
-
-        UserDetails marry = User.builder()
-                .username("marry")
-                .password("{noop}marry123")
                 .roles("EMP")
                 .build();
 
-        return new InMemoryUserDetailsManager(userDetails, marry);
-    }*/
+        UserDetails marry = User.builder()
+                .username("luffy")
+                .password("{noop}test123")
+                .roles("LEADER", "EMP")
+                .build();
+
+        UserDetails manager = User.builder()
+                .username("zoro")
+                .password("{noop}test123")
+                .roles("EMP")
+                .build();
+
+        return new InMemoryUserDetailsManager(userDetails, marry, manager);
+    }
 
     /**
      * Fetch data from Table
@@ -69,4 +76,30 @@ public class EmpSecurity {
     }*/
 
     //----------------------------------------END of CRUD REST API----------------------------------//
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeHttpRequests(configurer -> {
+            configurer
+                    .requestMatchers("/").hasRole("EMP")
+                    .requestMatchers("/leaders/**").hasRole("LEADER")
+                    .anyRequest().authenticated();
+        }).formLogin(form->
+                //TODO: No need to write any Controller for /authTheUser, but you have to write for /login
+                //TODO authTheUser will be handled by Spring Security Filters
+                form
+                        .loginPage("/showLogin")
+                        .loginProcessingUrl("/authTheUser")
+                        .permitAll()
+        ).logout(LogoutConfigurer::permitAll)
+                .exceptionHandling(httpSecurityExceptionHandlingConfigurer -> {
+                    //TODO: We can call this /access-denied anything , we like
+                    httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/access-denied");
+                });
+
+        //Use HTTP basic authentication
+        httpSecurity.httpBasic(Customizer.withDefaults());
+        httpSecurity.csrf(AbstractHttpConfigurer::disable);
+        return httpSecurity.build();
+    }
 }
