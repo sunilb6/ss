@@ -22,7 +22,7 @@ public class SecureSavingApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(/*AppDao appDao*/ AccountDAO dao) {
 		return runner -> {
-			wow(dao);
+			//wow(dao);
 			/*Employee employee = new Employee(
 					"Ussop", "ussop@gmail.com", 100
 			);
