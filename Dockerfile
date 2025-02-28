@@ -1,5 +1,5 @@
-# Use a lightweight base image with JDK (Java Development Kit)
-FROM eclipse-temurin:17-jdk-alpine
+# Use a lightweight JDK base image
+FROM eclipse-temurin:17-jdk-alpine AS build
 
 # Set working directory inside the container
 WORKDIR /app
@@ -15,9 +15,10 @@ COPY src src
 RUN chmod +x ./gradlew
 
 # Build the Spring Boot application
-RUN ./gradlew build --no-daemon && ls -lh build/libs
+RUN ./gradlew build --no-daemon
 
-RUN echo "Build directory is: $(pwd)/build"
+# Use a lightweight runtime image for the final container
+FROM eclipse-temurin:17-jdk-alpine
 
 # Set working directory inside the container
 WORKDIR /app
@@ -25,7 +26,7 @@ WORKDIR /app
 # Copy only the built JAR file from the previous stage
 COPY --from=build /app/build/libs/*.jar app.jar
 
-# Expose the port your Spring Boot app runs on
+# Expose the port the app runs on
 EXPOSE 8087
 
 # Set environment variables (if needed)
