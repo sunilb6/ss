@@ -12,6 +12,13 @@ repositories {
 	mavenCentral()
 }
 
+jar {
+	archiveBaseName.set("ss")
+	archiveVersion.set("1.0")
+	archiveFileName.set("ss-1.0.jar")
+}
+
+
 dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.28'
 
