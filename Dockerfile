@@ -38,7 +38,7 @@ WORKDIR /app
 
 
 # Copy only the built JAR file from the previous stage
-COPY --from=build /app/build/libs/ss-1.0.jar app.jar
+COPY --from=build /app/build/libs/ss-2.0.jar app.jar
 
 RUN ls -lah /app
 

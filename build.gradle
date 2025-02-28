@@ -14,8 +14,8 @@ repositories {
 
 bootJar {
 	archiveBaseName.set("ss")
-	archiveVersion.set("1.0")
-	archiveFileName.set("ss-1.0.jar")
+	archiveVersion.set("2.0")
+	archiveFileName.set("ss-2.0.jar")
 }
 
 
