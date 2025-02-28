@@ -15,7 +15,9 @@ COPY src src
 RUN chmod +x ./gradlew
 
 # Build the Spring Boot application
-RUN ./gradlew build --no-daemon
+RUN ./gradlew build --no-daemon && ls -lh build/libs
+
+RUN echo "Build directory is: $(pwd)/build"
 
 # Set working directory inside the container
 WORKDIR /app
