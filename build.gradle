@@ -12,7 +12,7 @@ repositories {
 	mavenCentral()
 }
 
-jar {
+bootJar {
 	archiveBaseName.set("ss")
 	archiveVersion.set("1.0")
 	archiveFileName.set("ss-1.0.jar")
