@@ -11,6 +11,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @SpringBootApplication
 public class SecureSavingApplication {
 	//This creating app context, register beans and start the embedded server by default
@@ -21,6 +26,7 @@ public class SecureSavingApplication {
 
 	@Bean
 	public CommandLineRunner commandLineRunner(/*AppDao appDao*/ AccountDAO dao) {
+
 		return runner -> {
 			//wow(dao);
 			/*Employee employee = new Employee(
@@ -57,8 +63,25 @@ public class SecureSavingApplication {
 	}
 
 	private void wow(AccountDAO dao) {
-		dao.addAccount();
-		System.out.println("Let's call it again!");
-		dao.addAccount();
+
+		String sentence = "I am going to cuttuck, I have a friend living in cuttuck";
+		String[] listOfWords = sentence.split(" ");
+		List<String> uniqueWords = Arrays.stream(listOfWords)
+				.map(String::toLowerCase).distinct().sorted().toList();
+		System.out.println(uniqueWords);
+
+		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+		List<Integer> wow = numbers.stream().
+				filter(n -> n % 2 == 0)
+				.toList();
+
+		List<String> words = Arrays.asList("apple", "banana", "cherry", "date");
+		Optional<String> wow2 = words.stream()
+				.reduce((w1, w2) -> w1.length() > w2.length() ? w1: w2);
+		wow2.isPresent(System.out::println);
+
+		//dao.addAccount();
+		//System.out.println("Let's call it again!");
+		//dao.addAccount();
 	}
 }

@@ -2,6 +2,8 @@ package com.example.securesaving.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "course")
 public class Course {
@@ -54,5 +56,17 @@ public class Course {
                 ", title='" + title + '\'' +
                 ", employee=" + employee +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return id == course.id && Objects.equals(title, course.title) && Objects.equals(employee, course.employee);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, employee);
     }
 }
